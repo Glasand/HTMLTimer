@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<span id="minutes">00</span>:<span id="seconds">59</span>
+
+	<script type="text/javascript">
+	var time = 0;
+	var timerId;
+	var bellRing = new Audio('School Bell Ringing Sound Effect.mp3');
+	var side = true;
+	var minFirst = 0;
+	var secFirst = 0;
+	var minSecond = 0;
+	var secSecond = 0;
+
+
+		function start(min, sec, min2, sec2)
+		{
+				timerId = null;
+				time = 0;
+				side = true;
+				minFirst = min;
+				minSecond = min2;
+				secFirst = sec;
+				secSecond = sec2;
+				startTimer(min, sec);
+			
+		}
+
+		function startTimer(min, sec)
+		{
+			var minute = min * 60;
+			time = minute + sec;
+			generateTime();
+				timerId = setInterval(function()
+				{
+					
+						if(time > 0)
+						{
+							time--;
+							generateTime();
+						}else if(time == 0)
+						{
+							
+							bellRing.play();
+							doNextLoop();
+						}
+						console.log(time);
+					
+
+				},1000);
+
+		}
+
+		function generateTime()
+		{
+			var sec = 0;
+			sec =  time % 60;
+			var min = 0;
+			min = Math.floor(time/60) % 60;
+
+
+			sec = (sec < 10) ? '0'+sec : sec;
+			min = (min < 10) ? '0'+min : min;
+
+			document.getElementById("minutes").innerHTML = min;
+			document.getElementById("seconds").innerHTML = sec;
+
+		}
+
+		function doNextLoop()
+		{
+			if(side)
+			{
+				side = false;
+				clearInterval(timerId);
+				startTimer(minSecond, secSecond);
+				generateTime();
+
+
+			}else{
+				clearInterval(timerId);
+				side = true;
+				startTimer(minFirst, secFirst);
+				generateTime();
+			}
+		}
+
+		addEventListener("click", function() {
+    	var el = document.documentElement,
+      	rfs = el.requestFullscreen
+        || el.webkitRequestFullScreen
+        || el.mozRequestFullScreen
+        || el.msRequestFullscreen 
+    	;
+
+    	rfs.call(el);
+		});
+
+
+	</script>
+</body>
+</html>
