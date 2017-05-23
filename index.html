@@ -310,14 +310,14 @@ function startTimer()
 
 }
 
-function checkFunction(windowId, min1, min2, sec1, sec2)
+function checkFunction(min1, min2, sec1, sec2)
 {
-       if(!windowId.start) {
+       if(!countdownWindow.start) {
                 setTimeout(checkFunction,1000);
         }
 	else
 	{ 
-		windowId.start(min1, sec1, min2, sec2); 
+		countdownWindow.start(min1, sec1, min2, sec2); 
 	}
 
 
