@@ -306,7 +306,7 @@ function startTimer()
         }
   if(!countdownWindow.start) {
             setTimeout(startTimer,1000);
-        } else { countdownWindow.start(minutes,seconds); }
+        } else { countdownWindow.start(minutes,seconds,minutes2,seconds2); }
 	window.focus();
   document.getElementById("start").value = "Change";
 
