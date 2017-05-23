@@ -64,9 +64,9 @@
 		{
 			
 			var min = 0;
-			min = Math.floor(time/60);
+			min = Math.floor(time/60) % 60;
 			var sec = 0;
-			sec =  (time - min) / 60;
+			sec =  time % 60;
 
 
 			sec = (sec < 10) ? '0'+sec : sec;
